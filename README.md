@@ -1,6 +1,6 @@
 # AICOMSOl — AI-Driven COMSOL Multiphysics Modeling Framework
 
-AI 驱动的 COMSOL Multiphysics 建模知识库与协作规范。为 AI 编程助手（如 Claude Code）提供完整的 COMSOL 建模上下文和工作流。
+AI 驱动的 COMSOL Multiphysics 建模知识库与协作规范。为 AI 编程助手（如 Codex、Claude Code）提供完整的 COMSOL 建模上下文和工作流。
 
 ## 设计理念
 
@@ -17,7 +17,7 @@ cd AICOMSOl
 
 ### 2. 部署到 AI 编程助手
 
-将 `CLAUDE.md` 作为项目指令部署给 AI 助手（Claude Code 自动读取项目根目录的 CLAUDE.md），AI 将自动：
+Codex 使用时，项目根目录的 `AGENTS.md` 是入口规则文件；Claude Code 使用时，项目根目录的 `CLAUDE.md` 是入口规则文件。AI 将自动：
 
 - 建模前检索 `database/` 知识库
 - 写代码时逐行对照 API 参考添加注释
@@ -35,6 +35,7 @@ export COMSOL_INSTALL_DIR="你的COMSOL安装目录"
 
 ```
 AICOMSOl/
+├── AGENTS.md                       ← Codex 项目指令（读取 CLAUDE.md 作为完整规则）
 ├── CLAUDE.md                       ← AI 协作规范（6条铁律 + 双轨策略）
 ├── README.md                       ← 本文件
 ├── LICENSE                         ← MIT
@@ -83,7 +84,7 @@ grep -i "NLfail" database/experience/comsol_debug_reference.txt
 
 两条途径底层调用同一个 COMSOL 引擎。新建走 Java batch，调试走 MPh。
 
-## 核心规则（详见 [CLAUDE.md](CLAUDE.md)）
+## 核心规则（Codex 详见 [AGENTS.md](AGENTS.md)，完整规则见 [CLAUDE.md](CLAUDE.md)）
 
 1. **每条语句对照 API 参考并加注释** — 禁止凭记忆写 API
 2. **两轮修复失败必须检索网络** — 禁止试错循环
@@ -110,4 +111,4 @@ MIT License — 详见 [LICENSE](LICENSE)
 
 ---
 
-🤖 知识库提供证据，铁律控制行为，双轨执行建模。Clone → 部署 CLAUDE.md → 即刻开始 AI 辅助建模。
+🤖 知识库提供证据，铁律控制行为，双轨执行建模。Clone → Codex 读取 AGENTS.md / Claude Code 读取 CLAUDE.md → 即刻开始 AI 辅助建模。
